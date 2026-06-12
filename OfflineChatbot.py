@@ -5,239 +5,239 @@ from tkinter import scrolledtext
 model = SentenceTransformer('all-MiniLM-L6-v2')
 
 qa_pairs = [
-    ("hello hi hey greetings γεια χαρά καλησπέρα",
-     "Γεια σας! 💡 Μπορώ να σας δώσω έξυπνες συμβουλές για εξοικονόμηση ρεύματος και χρημάτων!"),
+    ("hello hi hey greetings",
+     "Hello! I can give you smart tips to save electricity and money!"),
 
-    ("save money economy cheaper bill εξοικονόμηση οικονομία λογαριασμός",
-     "Μικρές αλλαγές στην καθημερινότητα μπορούν να μειώσουν σημαντικά τον λογαριασμό ρεύματος."),
+    ("save money economy cheaper bill",
+     "Small changes in your daily routine can significantly reduce your electricity bill."),
 
-    ("light lights lamp led λάμπες φωτισμός",
-     "Οι λάμπες LED καταναλώνουν έως και 80% λιγότερη ενέργεια από τις παλιές λάμπες πυρακτώσεως"),
+    ("light lights lamp led",
+     "LED bulbs consume up to 80% less energy than traditional incandescent bulbs."),
 
-    ("air condition ac cooling heating κλιματιστικό",
-     "Ρυθμίστε το κλιματιστικό στους 26°C το καλοκαίρι και 20-21°C τον χειμώνα για καλύτερη οικονομία."),
+    ("air condition ac cooling heating",
+     "Set your air conditioner to 26°C in summer and 20-21°C in winter for better energy savings."),
 
-    ("water heater boiler θερμοσίφωνας μπάνιο",
-     "Ο θερμοσίφωνας συνήθως χρειάζεται μόνο 15-20 λεπτά πριν το μπάνιο"),
+    ("water heater boiler shower",
+     "The water heater usually needs only 15-20 minutes before taking a shower."),
 
-    ("standby tv console charger πρίζα συσκευές",
-     "Οι συσκευές σε standby συνεχίζουν να καταναλώνουν ρεύμα. Κλείνετε πολύπριζα και φορτιστές όταν δεν χρησιμοποιούνται."),
+    ("standby tv console charger socket devices",
+     "Devices in standby mode continue to consume electricity. Turn off power strips and unplug chargers when not in use."),
 
-    ("washing machine laundry πλυντήριο ρούχα",
-     "Προτιμήστε πλύσιμο στους 30°C και γεμάτο πλυντήριο για χαμηλότερη κατανάλωση."),
+    ("washing machine laundry clothes",
+     "Prefer washing at 30°C with a full load for lower energy consumption."),
 
-    ("dishwasher πλυντήριο πιάτων",
-     "Το eco πρόγραμμα στο πλυντήριο πιάτων καταναλώνει λιγότερο ρεύμα και νερό."),
+    ("dishwasher",
+     "The eco program on a dishwasher uses less electricity and water."),
 
-    ("fridge refrigerator ψυγείο κατάψυξη",
-     "Η ιδανική θερμοκρασία ψυγείου είναι 4°C και κατάψυξης -18°C για οικονομία και σωστή λειτουργία."),
+    ("fridge refrigerator freezer",
+     "The ideal refrigerator temperature is 4°C and the freezer should be set to -18°C for efficiency and proper operation."),
 
-    ("oven kitchen cooking φούρνος μαγείρεμα",
-     "Μην ανοίγετε συχνά τον φούρνο όσο ψήνεται το φαγητό γιατί χάνεται θερμότητα."),
+    ("oven kitchen cooking",
+     "Avoid opening the oven frequently while cooking because heat escapes."),
 
     ("computer laptop gaming pc",
-     "Τα laptops καταναλώνουν πολύ λιγότερο ρεύμα από τους σταθερούς υπολογιστές."),
+     "Laptops consume much less electricity than desktop computers."),
 
-    ("charger phone battery κινητό φόρτιση",
-     "Βγάζετε τον φορτιστή από την πρίζα όταν δεν φορτίζει συσκευή"),
+    ("charger phone battery charging",
+     "Unplug the charger when it is not charging a device."),
 
-    ("night tariff νυχτερινό",
-     "Αν έχετε νυχτερινό ρεύμα, χρησιμοποιείτε ενεργοβόρες συσκευές τις βραδινές ώρες."),
+    ("night tariff",
+     "If you have a night electricity tariff, use energy-intensive appliances during nighttime hours."),
 
-    ("summer heat καλοκαίρι ζέστη",
-     "Κλείνετε παντζούρια και κουρτίνες τις ζεστές ώρες για να μειώνεται η χρήση κλιματιστικού."),
+    ("summer heat",
+     "Keep shutters and curtains closed during the hottest hours to reduce air conditioning use."),
 
-    ("winter cold χειμώνας θέρμανση",
-     "Χρησιμοποιήστε κουβέρτες και σωστή μόνωση για να μειώσετε τη θέρμανση."),
+    ("winter cold heating",
+     "Use blankets and proper insulation to reduce heating needs."),
 
-    ("smart tips tricks έξυπνα συμβουλές",
-     "Ένα πολύπριζο με διακόπτη βοηθά να κλείνετε πολλές συσκευές μαζί και να γλιτώνετε ρεύμα."),
+    ("smart tips tricks advice",
+     "A power strip with a switch helps you turn off multiple devices at once and save electricity."),
 
-    ("solar panels φωτοβολταϊκά",
-     "Τα φωτοβολταϊκά μπορούν να μειώσουν σημαντικά το κόστος ρεύματος μακροπρόθεσμα"),
+    ("solar panels",
+     "Solar panels can significantly reduce electricity costs in the long term."),
 
-    ("thanks thank you ευχαριστώ",
-     "Παρακαλώ! Αν θέλετε, μπορώ να σας δώσω κι άλλες συμβουλές εξοικονόμησης."),
+    ("thanks thank you",
+     "You're welcome! If you'd like, I can give you more energy-saving tips."),
 
-    ("coffee maker espresso καφετιέρα",
-     "Κλείνετε την καφετιέρα αμέσως μετά τη χρήση για να μην καταναλώνει άσκοπα ρεύμα"),
+    ("coffee maker espresso",
+     "Turn off the coffee machine immediately after use to avoid unnecessary energy consumption."),
 
-    ("iron clothes σίδερο ρούχα",
-     "Σιδερώνετε πολλά ρούχα μαζί για να αποφεύγετε συνεχές ζέσταμα του σίδερου."),
+    ("iron clothes",
+     "Iron multiple clothes at once to avoid repeated heating of the iron."),
 
-    ("microwave microwave oven φούρνος μικροκυμάτων",
-     "Ο φούρνος μικροκυμάτων καταναλώνει λιγότερη ενέργεια από τον κανονικό φούρνο για μικρά γεύματα."),
+    ("microwave microwave oven",
+     "A microwave oven usually consumes less energy than a conventional oven for small meals."),
 
-    ("curtains windows παράθυρα κουρτίνες",
-     "Οι χοντρές κουρτίνες βοηθούν να διατηρείται η θερμοκρασία του σπιτιού σταθερή."),
+    ("curtains windows",
+     "Thick curtains help maintain a stable indoor temperature."),
 
-    ("wifi router internet ρούτερ",
-     "Αν δεν χρησιμοποιείτε το internet τη νύχτα, μπορείτε να κλείνετε το router για εξοικονόμηση."),
+    ("wifi router internet",
+     "If you do not use the internet at night, you can turn off the router to save electricity."),
 
-    ("dryer στεγνωτήριο ρούχων",
-     "Αφήστε τα ρούχα να στεγνώσουν φυσικά όταν υπάρχει καλός καιρός αντί για στεγνωτήριο."),
+    ("dryer clothes dryer",
+     "Let clothes dry naturally when the weather is good instead of using a dryer."),
 
-    ("eco mode οικονομική λειτουργία",
-     "Οι λειτουργίες Eco στις συσκευές μειώνουν την κατανάλωση ρεύματος χωρίς μεγάλη διαφορά στην απόδοση."),
+    ("eco mode energy saving mode",
+     "Eco modes on appliances reduce electricity consumption with little impact on performance."),
 
-    ("vacation holiday λείπω διακοπές",
-     "Πριν φύγετε διακοπές, βγάλτε από την πρίζα όσες συσκευές δεν χρειάζονται."),
+    ("vacation holiday away",
+     "Before leaving for vacation, unplug devices that do not need to stay connected."),
 
-    ("television netflix youtube τηλεόραση",
-     "Μειώνοντας λίγο τη φωτεινότητα της τηλεόρασης μπορείτε να εξοικονομήσετε ενέργεια"),
+    ("television netflix youtube tv",
+     "Reducing your TV's brightness slightly can help save energy."),
 
-    ("fan ανεμιστήρας",
-     "Ο ανεμιστήρας καταναλώνει πολύ λιγότερο ρεύμα από το κλιματιστικό."),
+    ("fan",
+     "A fan consumes much less electricity than an air conditioner."),
 
-    ("windows open ventilation αερισμός",
-     "Αερίζετε το σπίτι νωρίς το πρωί ή αργά το βράδυ για να παραμένει πιο δροσερό."),
+    ("windows open ventilation",
+     "Ventilate your home early in the morning or late in the evening to keep it cooler."),
 
-    ("full battery charging φόρτιση μπαταρία",
-     "Μην αφήνετε συσκευές να φορτίζουν όλη νύχτα χωρίς λόγο."),
+    ("full battery charging",
+     "Do not leave devices charging overnight unnecessarily."),
 
-    ("energy class ενεργειακή κλάση",
-     "Οι συσκευές ενεργειακής κλάσης A καταναλώνουν λιγότερο ρεύμα μακροπρόθεσμα."),
+    ("energy class",
+     "Energy class A appliances consume less electricity in the long run."),
 
     ("gaming console playstation xbox",
-     "Οι κονσόλες καταναλώνουν ρεύμα ακόμα και σε κατάσταση αναμονής."),
+     "Game consoles consume electricity even in standby mode."),
 
-    ("electric heater αερόθερμο θερμάστρα",
-     "Τα αερόθερμα καταναλώνουν πολύ ρεύμα — χρησιμοποιείτε τα μόνο όταν χρειάζεται."),
+    ("electric heater fan heater",
+     "Electric fan heaters consume a lot of electricity—use them only when necessary."),
 
-    ("smart home automation έξυπνο σπίτι",
-     "Οι έξυπνες πρίζες βοηθούν να ελέγχετε καλύτερα την κατανάλωση ρεύματος."),
+    ("smart home automation",
+     "Smart plugs help you better monitor and control electricity consumption."),
 
-    ("sun natural light ήλιος φυσικό φως",
-     "Εκμεταλλευτείτε το φυσικό φως της ημέρας αντί να ανάβετε λάμπες."),
+    ("sun natural light",
+     "Take advantage of natural daylight instead of turning on lights."),
 
-    ("freezer ice πάγος κατάψυξη",
-     "Η πολλή πάχνη στην κατάψυξη αυξάνει την κατανάλωση ρεύματος."),
+    ("freezer ice",
+     "Excess frost in the freezer increases electricity consumption."),
 
-    ("door fridge open πόρτα ψυγείου",
-     "Μην αφήνετε την πόρτα του ψυγείου ανοιχτή για πολλή ώρα."),
+    ("door fridge open",
+     "Do not leave the refrigerator door open for long periods."),
 
-    ("temperature thermostat θερμοστάτης",
-     "Ακόμα και 1°C διαφορά στον θερμοστάτη μπορεί να επηρεάσει τον λογαριασμό ρεύματος."),
+    ("temperature thermostat",
+     "Even a 1°C change on the thermostat can affect your electricity bill."),
 
-    ("led strip rgb φωτάκια",
-     "Κλείνετε τα διακοσμητικά φωτάκια όταν δεν τα χρειάζεστε για να μειώνεται η κατανάλωση."),
+    ("led strip rgb lights",
+     "Turn off decorative lights when not needed to reduce energy consumption."),
 
-    ("phone brightness φωτεινότητα κινητού",
-     "Η χαμηλότερη φωτεινότητα σε κινητά και tablets βοηθά και στην οικονομία μπαταρίας"),
+    ("phone brightness",
+     "Lower screen brightness on phones and tablets also helps save battery power."),
 
-    ("air fryer φριτέζα αέρος",
-     "Το air fryer συνήθως καταναλώνει λιγότερο ρεύμα από τον μεγάλο φούρνο."),
+    ("air fryer",
+     "An air fryer usually consumes less electricity than a conventional oven."),
 
-    ("kettle water boiler βραστήρας",
-     "Βράζετε μόνο όσο νερό χρειάζεστε για να μην σπαταλάτε ενέργεια."),
+    ("kettle water boiler",
+     "Boil only the amount of water you need to avoid wasting energy."),
 
-    ("balcony shade σκίαση μπαλκόνι",
-     "Οι τέντες και η σκίαση μειώνουν τη θερμότητα μέσα στο σπίτι το καλοκαίρι."),
+    ("balcony shade",
+     "Awnings and shading help reduce indoor heat during summer."),
 
-    ("dust cleaning καθαρισμός φίλτρα",
-     "Τα καθαρά φίλτρα σε κλιματιστικά και συσκευές βοηθούν στη χαμηλότερη κατανάλωση."),
+    ("dust cleaning filters",
+     "Clean filters in air conditioners and appliances help reduce energy consumption."),
 
-    ("sleep mode ύπνος υπολογιστή",
-     "Βάλτε τον υπολογιστή σε sleep mode όταν δεν τον χρησιμοποιείτε για αρκετή ώρα."),
+    ("sleep mode computer",
+     "Put your computer into sleep mode when not using it for an extended period."),
 
-    ("multiple devices πολλές συσκευές",
-     "Αποφύγετε να λειτουργούν πολλές ενεργοβόρες συσκευές ταυτόχρονα."),
+    ("multiple devices",
+     "Avoid running multiple high-energy appliances at the same time."),
 
-    ("heater door πόρτες θέρμανση",
-     "Κλείνετε τις πόρτες στα δωμάτια για να διατηρείται καλύτερα η θερμοκρασία."),
+    ("heater door",
+     "Keep room doors closed to better maintain indoor temperature."),
 
-    ("energy monitor μετρητής κατανάλωσης",
-     "Ένας μετρητής κατανάλωσης βοηθά να δείτε ποιες συσκευές καίνε περισσότερο ρεύμα."),
+    ("energy monitor",
+     "An energy monitor helps identify which appliances consume the most electricity."),
 
-    ("bath shower μπάνιο ντους",
-     "Ένα σύντομο ντους καταναλώνει λιγότερη ενέργεια και νερό"),
+    ("bath shower",
+     "A short shower uses less energy and water."),
 
-    ("eco washing οικονομικό πλύσιμο",
-     "Τα οικολογικά προγράμματα πλύσης διαρκούν περισσότερο αλλά καίνε λιγότερο ρεύμα."),
+    ("eco washing economical washing",
+     "Eco washing programs take longer but consume less electricity."),
 
-    ("small appliances μικροσυσκευές",
-     "Οι μικροσυσκευές που μένουν μόνιμα στην πρίζα αυξάνουν την κατανάλωση."),
+    ("small appliances",
+     "Small appliances left permanently plugged in increase electricity consumption."),
 
-    ("kitchen extractor απορροφητήρας",
-     "Κλείνετε τον απορροφητήρα μόλις τελειώσετε το μαγείρεμα."),
+    ("kitchen extractor hood",
+     "Turn off the kitchen extractor hood as soon as you finish cooking."),
 
-    ("electric oven προθέρμανση",
-     "Δεν χρειάζεται πάντα μεγάλη προθέρμανση στον φούρνο."),
+    ("electric oven preheating",
+     "A long preheating time is not always necessary for the oven."),
 
-    ("laptop battery μπαταρία laptop",
-     "Αποσυνδέετε το laptop από το ρεύμα όταν έχει φορτίσει πλήρως."),
+    ("laptop battery",
+     "Disconnect the laptop from power once it is fully charged."),
 
-    ("printer εκτυπωτής",
-     "Οι εκτυπωτές σε standby συνεχίζουν να καταναλώνουν ενέργεια."),
+    ("printer",
+     "Printers in standby mode continue to consume electricity."),
 
-    ("charger unplug βγάλτε φορτιστή",
-     "Ακόμα και χωρίς κινητό, ο φορτιστής τραβά μικρή ποσότητα ρεύματος."),
+    ("charger unplug",
+     "Even without a phone connected, a charger still draws a small amount of electricity."),
 
-    ("sun drying άπλωμα ρούχων",
-     "Το άπλωμα ρούχων στον ήλιο μειώνει τη χρήση στεγνωτηρίου"),
+    ("sun drying clothes drying",
+     "Drying clothes in the sun reduces the need for a clothes dryer."),
 
-    ("ac maintenance συντήρηση κλιματιστικού",
-     "Η σωστή συντήρηση του κλιματιστικού βοηθά στην καλύτερη απόδοση."),
+    ("ac maintenance air conditioner maintenance",
+     "Proper air conditioner maintenance helps improve efficiency."),
 
-    ("thermos hot water θερμός",
-     "Χρησιμοποιήστε θερμός για να κρατάτε ζεστό νερό χωρίς επαναλαμβανόμενο βράσιμο."),
+    ("thermos hot water",
+     "Use a thermos to keep water hot instead of boiling it repeatedly."),
 
     ("gaming pc rgb lights",
-     "Τα έντονα RGB φώτα σε gaming setups αυξάνουν ελαφρώς την κατανάλωση."),
+     "Bright RGB lighting in gaming setups slightly increases electricity consumption."),
 
-    ("refrigerator space ψυγείο γεμάτο",
-     "Ένα σωστά γεμάτο ψυγείο διατηρεί καλύτερα τη θερμοκρασία."),
+    ("refrigerator space full fridge",
+     "A properly filled refrigerator maintains its temperature more efficiently."),
 
-    ("fridge hot food ζεστό φαγητό",
-     "Μην βάζετε ζεστό φαγητό απευθείας στο ψυγείο."),
+    ("fridge hot food",
+     "Do not place hot food directly into the refrigerator."),
 
-    ("extension cord πολύπριζο",
-     "Τα πολύπριζα με διακόπτη βοηθούν να κλείνετε εύκολα πολλές συσκευές."),
+    ("extension cord power strip",
+     "Power strips with switches make it easy to turn off multiple devices."),
 
-    ("desktop computer σταθερός υπολογιστής",
-     "Κλείνετε την οθόνη όταν δεν χρησιμοποιείτε τον υπολογιστή."),
+    ("desktop computer",
+     "Turn off the monitor when you are not using the computer."),
 
-    ("energy saving mode λειτουργία εξοικονόμησης",
-     "Ενεργοποιήστε τη λειτουργία εξοικονόμησης σε κινητά και υπολογιστές."),
+    ("energy saving mode",
+     "Enable energy-saving mode on phones and computers."),
 
-    ("water temperature θερμοκρασία νερού",
-     "Η πολύ υψηλή θερμοκρασία νερού αυξάνει άσκοπα την κατανάλωση."),
+    ("water temperature",
+     "Excessively high water temperatures unnecessarily increase energy consumption."),
 
-    ("room ventilation δωμάτιο αερισμός",
-     "Ο σωστός αερισμός βοηθά να μειώνεται η ανάγκη για κλιματισμό."),
+    ("room ventilation",
+     "Proper ventilation helps reduce the need for air conditioning."),
 
-    ("induction stove επαγωγική εστία",
-     "Οι επαγωγικές εστίες είναι πιο αποδοτικές ενεργειακά από τις παλιές ηλεκτρικές."),
+    ("induction stove",
+     "Induction cooktops are more energy-efficient than older electric stoves."),
 
-    ("freezer organization οργάνωση κατάψυξης",
-     "Η σωστή οργάνωση στην κατάψυξη μειώνει τον χρόνο που μένει ανοιχτή."),
+    ("freezer organization",
+     "Proper freezer organization reduces the time the door stays open."),
 
-    ("smart thermostat έξυπνος θερμοστάτης",
-     "Ένας έξυπνος θερμοστάτης βοηθά στον καλύτερο έλεγχο της κατανάλωσης."),
+    ("smart thermostat",
+     "A smart thermostat helps improve control of energy consumption."),
 
-    ("electric car φόρτιση αυτοκινήτου",
-     "Η φόρτιση ηλεκτρικού αυτοκινήτου τη νύχτα μπορεί να είναι οικονομικότερη."),
+    ("electric car charging",
+     "Charging an electric car at night may be more economical."),
 
-    ("window insulation μόνωση παραθύρων",
-     "Η καλή μόνωση στα παράθυρα μειώνει απώλειες θερμότητας."),
+    ("window insulation",
+     "Good window insulation reduces heat loss."),
 
-    ("old appliances παλιές συσκευές",
-     "Οι πολύ παλιές συσκευές καταναλώνουν συνήθως περισσότερο ρεύμα."),
+    ("old appliances",
+     "Very old appliances usually consume more electricity."),
 
-    ("fan cleaning καθάρισμα ανεμιστήρα",
-     "Οι καθαροί ανεμιστήρες λειτουργούν πιο αποδοτικά."),
+    ("fan cleaning",
+     "Clean fans operate more efficiently."),
 
-    ("dishwasher full load γεμάτο πλυντήριο",
-     "Βάζετε σε λειτουργία το πλυντήριο πιάτων μόνο όταν γεμίσει."),
+    ("dishwasher full load",
+     "Run the dishwasher only when it is full."),
 
-    ("ac doors windows πόρτες παράθυρα",
-     "Κλείνετε πόρτες και παράθυρα όταν λειτουργεί το κλιματιστικό."),
+    ("ac doors windows",
+     "Keep doors and windows closed while the air conditioner is running."),
 
-    ("natural cooling φυσική δροσιά",
-     "Τα φυτά στο μπαλκόνι βοηθούν να μειώνεται η θερμοκρασία του χώρου"),
+    ("natural cooling",
+     "Plants on the balcony can help reduce the surrounding temperature."),
 
-    ("electric toothbrush οδοντόβουρτσα",
-     "Αποσυνδέετε τη βάση φόρτισης όταν δεν χρειάζεται."),
+    ("electric toothbrush",
+     "Unplug the charging base when it is not needed."),
 ]
 
 question_texts = [q for q, a in qa_pairs]
@@ -280,7 +280,7 @@ class ChatbotUI:
         self.chat_area.pack(pady=10, padx=10)
         self.chat_area.insert(tk.END,
                               "Welcome to the Chatbot!\n"
-                              "Ask about ... (e.g., '...').\n")
+                              "Ask about energy tips.\n")
         self.chat_area.config(state='disabled')
 
         # Input frame
@@ -315,7 +315,7 @@ class ChatbotUI:
         self.chat_area.config(state = "normal")
         self.chat_area.delete(1.0, tk.END)
         self.chat_area.insert(tk.END, "Welcome to the Chatbot!\n"
-                                      "Ask about recipes (e.g., ).\n")
+                                      "Ask about energy tips.\n")
         self.chat_area.config(state = "disabled")
 
 def main():
